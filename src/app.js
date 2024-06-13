@@ -2,8 +2,7 @@ import express from 'express';
 import { config } from 'dotenv';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
-
-// import sellerRoutes from './routes/seller.routes.js';
+import userRouter from './routes/user.routes.js'
 import healthCheckRouter from './routes/healthcheck.routes.js';
 import authRoutes from "./routes/auth.routes.js"
 
@@ -24,8 +23,7 @@ app.use(express.json());
 
 app.use("/", healthCheckRouter);
 app.use('/api/auth', authRoutes);
-// app.use('/api/seller', sellerRoutes);
-// app.use('/api/all' , allrouter);
+app.use('/api/auth', userRouter);
 
 
 export default app;
