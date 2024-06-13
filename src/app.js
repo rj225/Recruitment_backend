@@ -1,7 +1,7 @@
 import express from 'express';
 import { config } from 'dotenv';
 import cors from 'cors';
-import cookieParser from 'cookie-parser';
+import cookieparser from 'cookie-parser';
 import userRouter from './routes/user.routes.js'
 import healthCheckRouter from './routes/healthcheck.routes.js';
 import authRoutes from "./routes/auth.routes.js"
@@ -16,9 +16,10 @@ app.use(cors({
     credentials: true
 }));
 
-app.use(cookieParser());
+app.use(express.json({limit:"16kb"}))
 app.use(express.urlencoded({extended:true}))
-app.use(express.json());
+app.use(express.static("public"))
+app.use(cookieparser())
 
 
 app.use("/", healthCheckRouter);

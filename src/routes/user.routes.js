@@ -5,6 +5,6 @@ import { isAuthenticatedCompany } from '../middleware/auth.middlewares.js';
 
 const router = express.Router();
 
-router.get('/users' , isAuthenticatedCompany , getAllUsers)
+router.get('/users' , getAllUsers)
 
 export default router;

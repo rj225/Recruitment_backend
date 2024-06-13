@@ -106,18 +106,15 @@ export const login = async (req, res) => {
             throw new apiError(401, "Invalid email or password");
         }
 
-        const token = generateToken(c_email, company[0].role); // Generate token with username, user ID, and role
+        const token = generateToken(c_email, company[0].role); 
 
-        // Update user document in the database with the generated token
         await query('UPDATE companies SET token = ? WHERE id = ?', [token, company[0].id]);
 
         const options = {
             httpOnly: true,
-            secure: true, // Set to true if you're using HTTPS
+            secure: false, 
         };
 
-
-        // Exclude sensitive information from the user object
         const { password: userPassword, ...loggedInUser } = company[0];
 
         return res
