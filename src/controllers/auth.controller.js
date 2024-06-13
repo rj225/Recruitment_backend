@@ -22,7 +22,6 @@ export const signup = async (req, res) => {
         }
 
         const emailCheckResult = await query('SELECT email FROM users WHERE email = ?', [email]);
-        console.log("Email check result: ", emailCheckResult);
 
         if (emailCheckResult[0].length > 0) {
             throw new apiError(400, "Email already exists");
@@ -58,9 +57,9 @@ export const register = async (req, res) => {
             throw new apiError(400, "Name, email, and password are required");
         }
 
-        const emailCheckResult = await query('SELECT * FROM companies WHERE email = ?', [c_email]);
+        const emailCheckResult = await query('SELECT * FROM companies WHERE c_email = ?', [c_email]);
         if (emailCheckResult[0].length > 0) {
-            throw new apiError(200 , "email already exit" ,[])
+            throw new apiError(400 , "email already exit" ,[])
         }
 
         const hashedPassword = await bcrypt.hash(password, 10);
