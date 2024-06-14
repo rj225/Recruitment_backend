@@ -139,40 +139,6 @@ export const login = async (req, res) => {
 
 
 
-export const bookmarkUser = async (req, res) => {
-    try {
-        const { userId } = req.body;
-        const companyId = req.company[0].id; // Assuming you have middleware that sets req.company
-        console.log(req.company[0]);
-
-        if (![userId].every(field => field?.trim())) {
-            throw new apiError(400, "User ID, location, and domain are required");
-        }
-
-        // Check if the user exists
-        const [user] = await query('SELECT * FROM users WHERE id = ?', [userId]);
-        if (!user) {
-            throw new apiError(404, "User not found");
-        }
-
-        // Insert the bookmark record
-        await query('INSERT INTO bookmarks (user_id, company_id) VALUES (?, ?)', [userId, companyId]);
-
-        const responseData = {
-            message: "User bookmarked successfully"
-        };
-
-        res.status(201).json(new apiResponse(201, responseData, "User bookmarked successfully"));
-    } catch (error) {
-        console.error("Error during bookmarking:", error);
-        res.status(500).json(new apiResponse(500, {}, error.message));
-    }
-};
-
-
-
-
-
 
 export const logout = async (req, res) => {
     try {

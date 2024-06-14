@@ -4,8 +4,8 @@ import cors from 'cors';
 import cookieparser from 'cookie-parser';
 import userRouter from './routes/user.routes.js'
 import healthCheckRouter from './routes/healthcheck.routes.js';
-import authRoutes from "./routes/auth.routes.js"
-
+import authRouter from "./routes/auth.routes.js"
+import bookmarkRouter from './routes/bookmark.routes.js'
 
 config();
 
@@ -23,8 +23,9 @@ app.use(cookieparser())
 
 
 app.use("/", healthCheckRouter);
-app.use('/api/auth', authRoutes);
+app.use('/api/auth', authRouter);
 app.use('/api/auth', userRouter);
+app.use('/api/auth', bookmarkRouter);
 
 
 export default app;
