@@ -37,6 +37,8 @@ const verifyToken = async (req, res, next) => {
 export const isAuthenticatedCompany = async (req, res, next) => {
     try {
         const token = req.cookies?.token || (req.headers['authorization'] && req.headers['authorization'].replace('Bearer ', ''));
+
+        console.log("token",token);
         if (!token) {
             throw new apiError(401, "Access denied. No token provided.");
         }
