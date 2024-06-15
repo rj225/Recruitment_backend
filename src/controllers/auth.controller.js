@@ -112,8 +112,9 @@ export const login = async (req, res) => {
 
         const options = {
             httpOnly: true,
-            secure: false,//process.env.NODE_ENV === 'production', // Ensure secure cookies in production
-            same_site: 'None'
+            secure: process.env.NODE_ENV === 'production',
+            sameSite: 'None',
+            maxAge: 30 * 24 * 60 * 60 * 1000 // 30 days expiration in milliseconds
         };
 
         const { password: userPassword, ...loggedInUser } = company[0];
@@ -153,7 +154,7 @@ export const logout = async (req, res) => {
         // Clear the cookie containing the token
         const options = {
             httpOnly: true,
-            secure: false, // Set to true if you're using HTTPS
+            secure: process.env.NODE_ENV === 'production', // Set to true if you're using HTTPS
             same_site: 'None'
         };
 
