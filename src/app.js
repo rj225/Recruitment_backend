@@ -15,12 +15,12 @@ const app = express();
 //     origin: process.env.CORS_ALLOWED,
 //     credentials: true
 // }));
-const allowedOrigins = [
-  // 'https://recruitment-solution-eight.vercel.app', // Update with your Vercel frontend URL
-  'http://localhost:3000' // Allow localhost for development
-];
+// const allowedOrigins = [
+//   // 'https://recruitment-solution-eight.vercel.app', // Update with your Vercel frontend URL
+//   'http://localhost:3000' // Allow localhost for development
+// ];
 
-// const allowedOrigins = (process.env.CORS_ALLOWED || '').split(',');
+const allowedOrigins = (process.env.CORS_ALLOWED || '').split(',');
 
 const corsOptions = {
   origin: function(origin, callback) {
