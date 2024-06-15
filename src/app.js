@@ -16,7 +16,7 @@ const app = express();
 //     credentials: true
 // }));
 const allowedOrigins = [
-  'https://recruitment-solution-eight.vercel.app', // Update with your Vercel frontend URL
+  // 'https://recruitment-solution-eight.vercel.app', // Update with your Vercel frontend URL
   'http://localhost:3000' // Allow localhost for development
 ];
 
