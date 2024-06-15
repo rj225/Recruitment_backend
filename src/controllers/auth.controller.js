@@ -59,7 +59,7 @@ export const register = async (req, res) => {
 
         const emailCheckResult = await query('SELECT * FROM companies WHERE c_email = ?', [c_email]);
         if (emailCheckResult[0].length > 0) {
-            throw new apiError(400 , "email already exit" ,[])
+            throw new apiError(400, "email already exit", [])
         }
 
         const hashedPassword = await bcrypt.hash(password, 10);
@@ -106,13 +106,14 @@ export const login = async (req, res) => {
             throw new apiError(401, "Invalid email or password");
         }
 
-        const token = generateToken(c_email, company[0].role); 
+        const token = generateToken(c_email, company[0].role);
 
         await query('UPDATE companies SET token = ? WHERE id = ?', [token, company[0].id]);
 
         const options = {
             httpOnly: true,
-            secure: false, 
+            secure: process.env.NODE_ENV === 'production', // Ensure secure cookies in production
+            sameSite: 'None'
         };
 
         const { password: userPassword, ...loggedInUser } = company[0];
