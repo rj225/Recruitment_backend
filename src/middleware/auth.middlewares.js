@@ -36,6 +36,9 @@ const verifyToken = async (req, res, next) => {
 
 export const isAuthenticatedCompany = async (req, res, next) => {
     try {
+
+        console.log('Cookies:', req.cookies); // Log cookies
+        console.log('Authorization Header:', req.headers['authorization']); // Log authorization header
         const token = req.cookies?.token || (req.headers['authorization'] && req.headers['authorization'].replace('Bearer ', ''));
 
         console.log("token",token);
